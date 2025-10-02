@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un nouveau personnage</title>
+    <style>
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 20px;
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            color: #555;
+        }
+        #drop-area.highlight {
+            border-color: blue;
+        }
+        #fileElem {
+            display: none;
+        }
+        button {
+            margin-top: 10px;
+        }
+        #preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #preview img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajouter un nouveau personnage</h1>
+
+    <form id="uploadForm" action="/upload_personnage" method="post" enctype="multipart/form-data">
+        <label for="nom">Nom du personnage :</label>
+        <input type="text" name="nom" id="nom" required><br><br>
+
+        <div id="drop-area">
+            <p>Glissez-déposez une image ici<br>ou cliquez pour sélectionner un fichier</p>
+            <input type="file" name="image" id="fileElem" accept="image/*" required>
+            <button type="button" id="fileSelect">Choisir un fichier</button>
+
+            <div id="preview"></div>
+        </div>
+
+
+
+        <button type="submit">Uploader</button>
+    </form>
+
+    <script>
+        let dropArea = document.getElementById('drop-area');
+        let fileElem = document.getElementById('fileElem');
+        let fileSelect = document.getElementById('fileSelect');
+        let preview = document.getElementById('preview');
+
+        fileSelect.addEventListener('click', () => fileElem.click());
+
+        // Empêche le comportement par défaut pour le drag & drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('highlight'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('highlight'), false);
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            let files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileElem.files = files;
+                previewFile(files[0]);
+            }
+        });
+
+        fileElem.addEventListener('change', () => {
+            if (fileElem.files.length > 0) {
+                previewFile(fileElem.files[0]);
+            }
+        });
+
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                preview.innerHTML = `<img src="${reader.result}" alt="Prévisualisation">`;
+            }
+        }
+    </script>
+</body>
+</html>
