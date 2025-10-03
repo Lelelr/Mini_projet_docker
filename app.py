@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import os
 from werkzeug.utils import secure_filename
 
+# test
 app = Flask(__name__)
 
 UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '../static/uploaded_images'))
@@ -16,7 +17,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def new_personnage():
-    return render_template('new_personnage.html')
+    return render_template('import.html')
 
 @app.route('/upload_personnage', methods=['POST'])
 def upload_personnage():
@@ -40,4 +41,4 @@ def upload_personnage():
 
 if __name__ == '__main__':
     print("Dossier d'upload :", UPLOAD_FOLDER)
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
