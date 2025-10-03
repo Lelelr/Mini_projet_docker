@@ -1,0 +1,31 @@
+version: '3'
+services:
+  flask-app:
+    image: nicogag/flask-app
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db/myapp
+    volumes:
+      - .:/app
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080  
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=user
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

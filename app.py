@@ -44,4 +44,4 @@ def upload_personnage():
 
 if __name__ == '__main__':
     print("Dossier d'upload :", UPLOAD_FOLDER)
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=5001)
