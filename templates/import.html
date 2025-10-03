@@ -18,9 +18,9 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="accueil.html">Accueil</a></li>
-                    <li><a href="">Upload image</a></li>
-                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
+                    <li><a href="{{ url_for('new_personnage') }}">Upload image</a></li>
+                    <li><a href="{{ url_for('galerie') }}">Galerie</a></li>
                 </ul>
             </div>
         </nav>

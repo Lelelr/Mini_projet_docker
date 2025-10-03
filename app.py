@@ -16,8 +16,20 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
+def accueil():
+    return render_template('accueil.html')
+
+@app.route('/import')
 def new_personnage():
     return render_template('import.html')
+
+@app.route('/carte')
+def carte():
+    return render_template('carte.html')
+
+@app.route('/galerie')
+def galerie():
+    return render_template('galerie.html')
 
 @app.route('/upload_personnage', methods=['POST'])
 def upload_personnage():
