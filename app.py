@@ -15,6 +15,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+
+# Page d'accueil en se connectant sur localhost 5001
 @app.route('/')
 def new_personnage():
     return render_template('import.html')

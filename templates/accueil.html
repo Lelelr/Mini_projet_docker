@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/accueil.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accueil.css') }}">
     <title>Accueil</title>
 </head>
 <body>
-    <img src="../images/personnage_1.png" alt="">
+<!-- Navbar -->
+    <div class="navbar">
+        <nav>
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
+            <div class="logo">
+                LOGO
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="import.html">Upload image</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <h1>Accueil</h1>
     
 </body>
 </html>

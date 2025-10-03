@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/import.css') }}">
 </head>
 <body>
+<!-- Navbar -->
+    <div class="navbar">
+        <nav>
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
+            <div class="logo">
+                LOGO
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="accueil.html">Accueil</a></li>
+                    <li><a href="">Upload image</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+
+
     <h1>Ajouter un nouveau personnage</h1>
 
     <form id="uploadForm" action="/upload_personnage" method="post" enctype="multipart/form-data">
