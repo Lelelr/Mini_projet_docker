@@ -8,7 +8,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db/myapp
+      - DATABASE_URL=postgresql://user:password@db/myapp
     volumes:
       - .:/app
   adminer:

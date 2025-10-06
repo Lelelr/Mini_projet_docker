@@ -1,9 +1,19 @@
 from flask import Flask, request, render_template
 import os
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
 
 # test
 app = Flask(__name__)
+app.config['SQLACHEMY_DATABASE_URI'] = 'postgresql://user:password@db:5432/myapp'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(80), unique = True, nullable = False)
+    email = db.Column(db.String(120), unique = True, nullable = False)
+
 
 UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '../static/uploaded_images'))
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -53,4 +63,5 @@ def upload_personnage():
 
 if __name__ == '__main__':
     print("Dossier d'upload :", UPLOAD_FOLDER)
+    db.create_all()
     app.run(debug=True, host='0.0.0.0', port=5000)
