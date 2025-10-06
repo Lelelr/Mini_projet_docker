@@ -6,27 +6,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/galerie.css') }}">
     <title>Galerie</title>
 </head>
-<body>
-<!-- Navbar -->
-<div class="navbar">
-    <nav>
-        <div class="menu-icon">
-            <i class="fa fa-bars fa-2x"></i>
-        </div>
-        <div class="logo">
-            LOGO
-        </div>
-        <div class="menu">
-            <ul>
-                <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
-                <li><a href="{{ url_for('new_personnage') }}">Upload image</a></li>
-                <li><a href="{{ url_for('galerie') }}">Galerie</a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
 
-<h1>Gelerie</h1>
+<body>
+    <!---------------------------------------- NAVBAR ---------------------------------------->
+    <div class="navbar">
+        <nav>
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
+            <div class="logo">
+                LOGO
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
+                    <li><a href="{{ url_for('new_personnage') }}">Upload image</a></li>
+                    <li><a href="{{ url_for('galerie') }}">Galerie</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!---------------------------------------------------------------------------------------->
+    <h1>Galerie</h1>
 
 
 </body>

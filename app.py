@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import os
 from werkzeug.utils import secure_filename
+# from flask_sqlalchemy import SQLAlchemy
 
 # test
 app = Flask(__name__)
@@ -54,3 +55,7 @@ def upload_personnage():
 if __name__ == '__main__':
     print("Dossier d'upload :", UPLOAD_FOLDER)
     app.run(debug=True, host='0.0.0.0', port=5000)
+
+
+
+
