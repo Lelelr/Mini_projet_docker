@@ -89,7 +89,81 @@ color: #333;
 }
 /* --------------------------------------------------------------- */
 
+.centre {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    padding-top: 1rem;
+}
 
+
+
+
+
+
+
+
+
+
+
+
+/* Bouton */
+.button {
+  background-color: #ffffff00;
+  color: #fff;
+  width: 9.5em;
+  height: 2.9em;
+  border: #3654ff 0.2em solid;
+  border-radius: 11px;
+  text-align: right;
+  transition: all 0.6s ease;
+  display: block;
+  margin: 20px auto 0 auto;
+  position: relative;
+}
+
+.button_2 {
+  background-color: #ffffff00;
+  color: #fff;
+  width: 9.5em;
+  height: 2.9em;
+  border: #3654ff 0.2em solid;
+  border-radius: 11px;
+  text-align: center;
+  transition: all 0.6s ease;
+  display: block;
+  margin: 20px auto 0 auto;
+  position: relative;
+}
+
+.button:hover {
+  background-color: #3654ff;
+  cursor: pointer;
+}
+
+.button_2:hover {
+  background-color: #3654ff;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 1.6em;
+  margin: -0.2em 0.8em 1em;
+  position: absolute;
+  display: flex;
+  transition: all 0.6s ease;
+}
+
+.button:hover svg {
+  transform: translateX(5px);
+}
+
+.text {
+  margin: 0 1.5em
+}
 
 
 
@@ -123,3 +197,6 @@ button {
     max-height: 100px;
     border-radius: 10px;
 }
+
+
+

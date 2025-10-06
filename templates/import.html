@@ -28,25 +28,31 @@
 
 
 
+    <div class="centre">
+        <form id="uploadForm" action="/upload_personnage" method="post" enctype="multipart/form-data">
 
-    <h1>Ajouter un nouveau personnage</h1>
+            <div id="drop-area">
+                <p>Glissez-déposez une image ici<br>ou cliquez pour sélectionner un fichier</p>
+                <input type="file" name="image" id="fileElem" accept="image/*" required>
+                <button type="button" id="fileSelect" class="button_2">Choisir un fichier</button>
 
-    <form id="uploadForm" action="/upload_personnage" method="post" enctype="multipart/form-data">
-        <label for="nom">Nom du personnage :</label>
-        <input type="text" name="nom" id="nom" required><br><br>
-
-        <div id="drop-area">
-            <p>Glissez-déposez une image ici<br>ou cliquez pour sélectionner un fichier</p>
-            <input type="file" name="image" id="fileElem" accept="image/*" required>
-            <button type="button" id="fileSelect">Choisir un fichier</button>
-
-            <div id="preview"></div>
-        </div>
+                <div id="preview"></div>
+            </div>
 
 
+            <button type="submit" class="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                </svg>
 
-        <button type="submit">Uploader</button>
-    </form>
+                <div class="text">
+                    Générer
+                </div>
+            </button>
+
+        </form>
+    </div>
+
 
     <script>
         let dropArea = document.getElementById('drop-area');
