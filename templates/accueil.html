@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/accueil.css') }}">
     <title>Accueil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accueil.css') }}">
+    <!-- Import police -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<!-- Navbar -->
+    <!---------------------------------------- NAVBAR ---------------------------------------->
     <div class="navbar">
         <nav>
-            <div class="menu-icon">
-                <i class="fa fa-bars fa-2x"></i>
-            </div>
             <div class="logo">
                 LOGO
             </div>
+
             <div class="menu">
                 <ul>
                     <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
@@ -23,10 +26,85 @@
                     <li><a href="{{ url_for('galerie') }}">Galerie</a></li>
                 </ul>
             </div>
+
+            <div class="cta">
+                <a href="{{ url_for('new_personnage') }}" class="btn-try">Essayer</a>
+            </div>
+
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
         </nav>
     </div>
+    <!---------------------------------------------------------------------------------------->
 
-    <h1>Accueil</h1>
-    
+
+    <div class="centre">
+        <section class="hero">
+            <p class="annonce">🚀 Nouvelle version disponible !</p>
+
+            <h1 class="hero-title">
+                Transformer nimporte quelle <br>
+                image grâce à l'IA
+            </h1>
+
+            <p class="hero-subtitle">
+                Génère automatiquement une déscription, un titre et des mots-clés pour tes images en quelques secondes.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{{ url_for('new_personnage') }}" class="btn primary">Essayer maintenant</a>
+                <a href="#" class="btn secondary">En savoir plus</a>
+            </div>
+        </section>
+    </div>
+
+
+    <script>
+        let dropArea = document.getElementById('drop-area');
+        let fileElem = document.getElementById('fileElem');
+        let fileSelect = document.getElementById('fileSelect');
+        let preview = document.getElementById('preview');
+
+        fileSelect.addEventListener('click', () => fileElem.click());
+
+        // Empêche le comportement par défaut pour le drag & drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('highlight'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('highlight'), false);
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            let files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileElem.files = files;
+                previewFile(files[0]);
+            }
+        });
+
+        fileElem.addEventListener('change', () => {
+            if (fileElem.files.length > 0) {
+                previewFile(fileElem.files[0]);
+            }
+        });
+
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                preview.innerHTML = `<img src="${reader.result}" alt="Prévisualisation">`;
+            }
+        }
+    </script>
 </body>
 </html>

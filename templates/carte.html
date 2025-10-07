@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/carte.css') }}">
     <title>Carte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carte.css') }}">
+    <!-- Import police -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<!-- Navbar -->
+    <!---------------------------------------- NAVBAR ---------------------------------------->
     <div class="navbar">
         <nav>
             <div class="menu-icon">
@@ -25,17 +30,59 @@
             </div>
         </nav>
     </div>
+    <!---------------------------------------------------------------------------------------->
 
 
+    <div class="centre">
+        <h1>Page cartes</h1>
+    </div>
 
 
+    <script>
+        let dropArea = document.getElementById('drop-area');
+        let fileElem = document.getElementById('fileElem');
+        let fileSelect = document.getElementById('fileSelect');
+        let preview = document.getElementById('preview');
 
+        fileSelect.addEventListener('click', () => fileElem.click());
 
+        // Empêche le comportement par défaut pour le drag & drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
+        });
 
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('highlight'), false);
+        });
 
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('highlight'), false);
+        });
 
+        dropArea.addEventListener('drop', (e) => {
+            let files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileElem.files = files;
+                previewFile(files[0]);
+            }
+        });
 
+        fileElem.addEventListener('change', () => {
+            if (fileElem.files.length > 0) {
+                previewFile(fileElem.files[0]);
+            }
+        });
 
-    
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                preview.innerHTML = `<img src="${reader.result}" alt="Prévisualisation">`;
+            }
+        }
+    </script>
 </body>
 </html>

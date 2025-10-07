@@ -1,90 +1,220 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+/* Styles globaux */
+body {
+  margin: 0;
+  font-family: "Manrope", Arial, sans-serif;
+  background: #000;
+  color: white;
+  width: 100%;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
+
 /* --------------------------NAV-BAR------------------------------ */
+/* === NAVBAR === */
 .navbar {
-width: 100%;
-background-color: #ffffff;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-position: sticky;
-top: 0;
-z-index: 1000;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #000;
+  border-bottom: 1px solid #222;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
 }
 
 .navbar nav {
-display: flex;
-justify-content: space-between;
-align-items: center;
-max-width: 1200px;
-margin: 0 auto;
-padding: 0.8rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
 }
 
-/* === Logo === */
+/* === LOGO === */
 .navbar .logo {
-font-size: 1.5rem;
-font-weight: bold;
-letter-spacing: 1px;
-color: #333;
-cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #fff;
+  cursor: pointer;
 }
 
-/* === Menu === */
+/* === MENU === */
 .navbar .menu ul {
-display: flex;
-gap: 2rem;
-list-style: none;
-margin: 0;
-padding: 0;
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar .menu ul li a {
-text-decoration: none;
-color: #333;
-font-weight: 500;
-transition: color 0.3s ease;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .navbar .menu ul li a:hover {
-color: #007bff;
+  color: #fff;
 }
 
-/* === Icône burger === */
+/* === CTA (Bouton Essayer) === */
+.navbar .cta .btn-try {
+  text-decoration: none;
+  background: #fff;
+  color: #000;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.navbar .cta .btn-try:hover {
+  background: #e5e5e5;
+  transform: translateY(-2px);
+}
+
+/* === Burger Icon === */
 .menu-icon {
-display: none;
-cursor: pointer;
-color: #333;
+  display: none;
+  cursor: pointer;
+  color: #fff;
 }
 
 /* === Responsive === */
 @media (max-width: 768px) {
-    .menu-icon {
-    display: block;
-    }
-
-    .menu {
+  .menu {
     position: absolute;
     top: 60px;
     left: 0;
     width: 100%;
-    background: #fff;
+    background: #000;
     display: none;
     flex-direction: column;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    }
+    border-top: 1px solid #222;
+  }
 
-    .menu ul {
+  .menu ul {
     flex-direction: column;
     gap: 1rem;
     padding: 1rem 0;
-    }
+  }
 
-    .menu.active {
+  .menu.active {
     display: flex;
-    }
+  }
+
+  .cta {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
 }
+
 /* --------------------------------------------------------------- */
+
+.centre {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+}
+
+
+
+
+
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;   /* ⬅ place le contenu en haut */
+  min-height: 100vh;
+  text-align: center;
+  padding: 14rem 1rem 0;          /* ⬅ décale vers le bas depuis le haut */
+}
+
+
+/* Petite phrase au-dessus du titre */
+.annonce {
+  font-size: 0.9rem;
+  color: #9ca3af; /* gris clair */
+  margin-bottom: 1rem;
+}
+
+/* Gros titre avec effet dégradé */
+.hero-title {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(to bottom, #ffffff, #9ca3af);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 5rem;
+  }
+}
+
+/* Sous-titre */
+.hero-subtitle {
+  max-width: 600px;
+  color: #9ca3af;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Boutons */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+/* Bouton principal */
+.btn.primary {
+  background: white;
+  color: black;
+}
+
+.btn.primary:hover {
+  background: #e5e5e5;
+}
+
+/* Bouton secondaire */
+.btn.secondary {
+  border: 1px solid #4b5563;
+  color: white;
+}
+
+.btn.secondary:hover {
+  background: #1f2937;
+}
