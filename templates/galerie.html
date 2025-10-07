@@ -5,21 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galerie</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/galerie.css') }}">
+
     <!-- Import police -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/accueil.css') }}">
-    <title>Accueil</title>
-</head>
 
 <body>
     <!---------------------------------------- NAVBAR ---------------------------------------->
@@ -50,17 +42,23 @@
 
 
     <div class="centre">
-        <h1>Galerie</h1>
+        <h1 id="animation_1">Galerie</h1>
+
         <div class="galerie-container">
             {% for image in images %}
                 <div class="image-card">
-                    <img src="{{ url_for('static', filename='uploaded_images/' + image.filename) }}" alt="{{ image.filename }}">
+                    <div class="image-wrapper">
+                        <img src="{{ url_for('static', filename='templates/' + image.filename) }}" alt="{{ image.filename }}">
+                        <!-- Croix -->
+                        <button class="delete-btn">&times;</button> 
+                    </div>
                     <p>{{ image.filename }}</p>
                 </div>
             {% else %}
-                <p>Aucune image pour l’instant.</p>
+                <p class="no-image">Aucune image pour l’instant.</p>
             {% endfor %}
         </div>
+    </div>
 
 
     <script>
@@ -108,6 +106,32 @@
                 preview.innerHTML = `<img src="${reader.result}" alt="Prévisualisation">`;
             }
         }
+
+
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation(); // éviter que ça déclenche hover ou click sur la carte
+                const card = btn.closest('.image-card');
+                const imageId = card.dataset.id;
+
+                if (!confirm("Voulez-vous vraiment supprimer cette image ?")) return;
+
+                try {
+                    const response = await fetch(`/delete_image/${imageId}`, {
+                        method: 'DELETE',
+                    });
+
+                    if (response.ok) {
+                        card.remove(); // supprime la carte du front
+                    } else {
+                        alert("Erreur lors de la suppression.");
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Erreur lors de la suppression.");
+                }
+            });
+        });
     </script>
 </body>
 </html>
