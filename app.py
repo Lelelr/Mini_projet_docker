@@ -5,14 +5,19 @@ from flask_sqlalchemy import SQLAlchemy
 
 # test
 app = Flask(__name__)
-app.config['SQLACHEMY_DATABASE_URI'] = 'postgresql://user:password@db:5432/myapp'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    "DATABASE_URL",
+    "postgresql://user:password@db:5432/myapp"
+    )
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
 
 class User(db.Model):
     __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(80), unique = True, nullable = False)
-    email = db.Column(db.String(120), unique = True, nullable = False)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
 
 
 UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '../static/uploaded_images'))
@@ -63,5 +68,6 @@ def upload_personnage():
 
 if __name__ == '__main__':
     print("Dossier d'upload :", UPLOAD_FOLDER)
-    db.create_all()
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, host='0.0.0.0', port=5000)

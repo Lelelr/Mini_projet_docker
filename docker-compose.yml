@@ -1,7 +1,6 @@
-version: '3'
 services:
   flask-app:
-    image: nicogag/flask-app
+    build: .
     restart: always
     ports:
       - "5000:5000"
@@ -11,6 +10,8 @@ services:
       - DATABASE_URL=postgresql://user:password@db/myapp
     volumes:
       - .:/app
+    command: sh -c "sleep 5 && python3 app.py"
+
   adminer:
     image: adminer
     restart: always
