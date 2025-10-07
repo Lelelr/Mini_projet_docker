@@ -53,6 +53,13 @@ transition: color 0.3s ease;
 color: #007bff;
 }
 
+/* === Icône burger === */
+.menu-icon {
+display: none;
+cursor: pointer;
+color: #333;
+}
+
 /* === Responsive === */
 @media (max-width: 768px) {
     .menu-icon {
@@ -82,3 +89,13 @@ color: #007bff;
     }
 }
 /* --------------------------------------------------------------- */
+
+.centre {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    padding-top: 1rem;
+}

@@ -29,6 +29,56 @@
     <!---------------------------------------------------------------------------------------->
 
 
+    <div class="centre">
+        <h1>Page cartes</h1>
+    </div>
 
+
+    <script>
+        let dropArea = document.getElementById('drop-area');
+        let fileElem = document.getElementById('fileElem');
+        let fileSelect = document.getElementById('fileSelect');
+        let preview = document.getElementById('preview');
+
+        fileSelect.addEventListener('click', () => fileElem.click());
+
+        // Empêche le comportement par défaut pour le drag & drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('highlight'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('highlight'), false);
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            let files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileElem.files = files;
+                previewFile(files[0]);
+            }
+        });
+
+        fileElem.addEventListener('change', () => {
+            if (fileElem.files.length > 0) {
+                previewFile(fileElem.files[0]);
+            }
+        });
+
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                preview.innerHTML = `<img src="${reader.result}" alt="Prévisualisation">`;
+            }
+        }
+    </script>
 </body>
 </html>
