@@ -51,7 +51,16 @@
 
     <div class="centre">
         <h1>Galerie</h1>
-    </div>
+        <div class="galerie-container">
+            {% for image in images %}
+                <div class="image-card">
+                    <img src="{{ url_for('static', filename='uploaded_images/' + image.filename) }}" alt="{{ image.filename }}">
+                    <p>{{ image.filename }}</p>
+                </div>
+            {% else %}
+                <p>Aucune image pour l’instant.</p>
+            {% endfor %}
+        </div>
 
 
     <script>

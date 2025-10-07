@@ -13,11 +13,11 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-class User(db.Model):
-    __tablename__ = "users"
+class Image(db.Model):
+    __tablename__ = "images"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    filename = db.Column(db.String(255), nullable=False)
+    filepath = db.Column(db.String(255), nullable=False)
 
 
 UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '../static/uploaded_images'))
@@ -44,7 +44,9 @@ def carte():
 
 @app.route('/galerie')
 def galerie():
-    return render_template('galerie.html')
+    images = Image.query.all()
+    return render_template('galerie.html', images=images)
+
 
 @app.route('/upload_personnage', methods=['POST'])
 def upload_personnage():
@@ -60,9 +62,15 @@ def upload_personnage():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         try:
             file.save(filepath)
+            new_image = Image(filename=filename, filepath=filepath)
+            db.session.add(new_image)
+            db.session.commit()
+
         except Exception as e:
+            db.session.rollback()
             return f"Erreur lors de la sauvegarde du fichier : {e}", 500
-        return f"Personnage '{request.form['nom']}' ajouté avec succès !"
+        
+        return f"Image '{filename}' ajouté avec succès !"
     else:
         return "Format de fichier non autorisé", 400
 
