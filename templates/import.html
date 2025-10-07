@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un nouveau personnage</title>
+    <title>Nouveau personnage</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/import.css') }}">
+    <!-- Import police -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!---------------------------------------- NAVBAR ---------------------------------------->
+        <!---------------------------------------- NAVBAR ---------------------------------------->
     <div class="navbar">
         <nav>
-            <div class="menu-icon">
-                <i class="fa fa-bars fa-2x"></i>
-            </div>
             <div class="logo">
                 LOGO
             </div>
+
             <div class="menu">
                 <ul>
                     <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
@@ -24,35 +26,43 @@
                     <li><a href="{{ url_for('galerie') }}">Galerie</a></li>
                 </ul>
             </div>
+
+            <div class="cta">
+                <a href="{{ url_for('new_personnage') }}" class="btn-try">Essayer</a>
+            </div>
+
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
         </nav>
     </div>
     <!---------------------------------------------------------------------------------------->
 
 
-    <div class="centre">
-        <form id="uploadForm" action="/upload_personnage" method="post" enctype="multipart/form-data">
+    <div class="import-hero">
+        <h1 class="import-title">Transforme ton image avec l’IA</h1>
+        <p class="import-subtitle">Téléverse une image, ajoute ta description et laisse notre modèle générer une version unique ✨</p>
+    </div>
 
+    <div class="import-container">
+        <form id="uploadForm" action="/upload_personnage" method="post" enctype="multipart/form-data">
             <div id="drop-area">
                 <p>Glissez-déposez une image ici<br>ou cliquez pour sélectionner un fichier</p>
                 <input type="file" name="image" id="fileElem" accept="image/*" required>
                 <button type="button" id="fileSelect" class="button_2">Choisir un fichier</button>
-
                 <div id="preview"></div>
             </div>
 
-
             <button type="submit" class="button">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
-                </svg>
-
-                <div class="text">
-                    Générer
-                </div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+            </svg>
+            <div class="text">Générer</div>
             </button>
-
         </form>
     </div>
+
+
 
 
     <script>

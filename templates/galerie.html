@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/galerie.css') }}">
     <title>Galerie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/galerie.css') }}">
+    <!-- Import police -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accueil.css') }}">
+    <title>Accueil</title>
 </head>
 
 <body>
     <!---------------------------------------- NAVBAR ---------------------------------------->
     <div class="navbar">
         <nav>
-            <div class="menu-icon">
-                <i class="fa fa-bars fa-2x"></i>
-            </div>
             <div class="logo">
                 LOGO
             </div>
+
             <div class="menu">
                 <ul>
                     <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
@@ -24,13 +36,21 @@
                     <li><a href="{{ url_for('galerie') }}">Galerie</a></li>
                 </ul>
             </div>
+
+            <div class="cta">
+                <a href="{{ url_for('new_personnage') }}" class="btn-try">Essayer</a>
+            </div>
+
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
         </nav>
     </div>
     <!---------------------------------------------------------------------------------------->
 
 
     <div class="centre">
-        <h1>Page Galerie</h1>
+        <h1>Galerie</h1>
     </div>
 
 
