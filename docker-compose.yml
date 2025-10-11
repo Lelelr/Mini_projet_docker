@@ -1,32 +1,47 @@
 services:
-  flask-app:
+  webapp:
     build: .
-    restart: always
     ports:
       - "5000:5000"
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://user:password@db/myapp
     volumes:
       - .:/app
-    command: sh -c "sleep 5 && python3 app.py"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/myapp
+      - OLLAMA_API_BASE=http://ai:11434   # 👈 Remplacé ici
+    depends_on:
+      - db
+      - ai
+    command: python3 app.py
+
+  ai:
+    image: ollama/ollama
+    restart: always
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+      - ./uploaded_images:/app/uploaded_images
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080  
-  
-  db:
-    image: postgres
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=myapp
-      - POSTGRES_USER=user
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - "8080:8080"
 
 volumes:
   postgres_data:
+  ollama_models:
+
+networks:
+  default:
+    name: mini_network

@@ -47,18 +47,24 @@
         <div class="galerie-container">
             {% for image in images %}
                 <div class="image-card">
-                    <div class="image-wrapper">
-                        <img src="{{ url_for('static', filename='templates/' + image.filename) }}" alt="{{ image.filename }}">
-                        <!-- Croix -->
-                        <button class="delete-btn">&times;</button> 
-                    </div>
-                    <p>{{ image.filename }}</p>
+                    <a href="{{ url_for('carte', image_id=image.id) }}" class="image-link">
+                        <div class="image-wrapper">
+                            <img src="{{ url_for('uploaded_images', filename=image.filename) }}" alt="{{ image.filename }}">
+                        </div>
+                        {% if image.name %}
+                            <p class="image-name">{{ image.name }}</p>
+                        {% else %}
+                            <p class="image-name">{{ image.filename }}</p>
+                        {% endif %}
+                    </a>
                 </div>
             {% else %}
                 <p class="no-image">Aucune image pour l’instant.</p>
             {% endfor %}
         </div>
     </div>
+
+
 
 
     <script>

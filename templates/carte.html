@@ -31,10 +31,26 @@
         </nav>
     </div>
     <!---------------------------------------------------------------------------------------->
-
+ 
+    <!--------------------------------------- CENTRE ------------------------------------------>
 
     <div class="centre">
-        <h1>Page cartes</h1>
+        <div class="carte-container">
+            <div class="image-zone">
+                <img src="{{ url_for('uploaded_images', filename=image.filename) }}" alt="{{ image.filename }}">
+            </div>
+
+            <div class="info-zone">
+                {% if image.name and image.bio %}
+                    <h1 class="nom">{{ image.name }}</h1>
+                    <p class="bio">{{ image.bio }}</p>
+                {% else %}
+                    <h1 class="nom">Image : {{ image.filename }}</h1>
+                    <p class="bio"><em>Pas encore de biographie disponible.</em></p>
+                {% endif %}
+                <a href="{{ url_for('galerie') }}" class="retour">← Retour à la galerie</a>
+            </div>
+        </div>
     </div>
 
 

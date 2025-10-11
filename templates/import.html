@@ -38,6 +38,17 @@
     </div>
     <!---------------------------------------------------------------------------------------->
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+
 
     <div class="import-hero">
         <h1 class="import-title">Transforme ton image avec l’IA</h1>
@@ -61,6 +72,19 @@
             </button>
         </form>
     </div>
+
+    <div id="loading" style="display:none;">
+        <p>Génération en cours... ⏳</p>
+    </div>
+
+    {% if debug %}
+    <div style="margin: 20px; padding: 15px; border: 2px dashed red; background-color: #fff0f0; white-space: pre-wrap;">
+        <strong>DEBUG IA :</strong>
+        <pre>{{ debug }}</pre>
+    </div>
+    {% endif %}
+
+
 
 
 
@@ -110,6 +134,41 @@
                 preview.innerHTML = `<img src="${reader.result}" alt="Prévisualisation">`;
             }
         }
+
+        uploadForm.addEventListener('submit', () => {
+            document.getElementById('loading').style.display = 'block';
+        });
+
+
+        // const uploadForm = document.getElementById('uploadForm');
+
+        // uploadForm.addEventListener('submit', async (e) => {
+        //     e.preventDefault(); // empêcher le reload
+
+        //     const formData = new FormData(uploadForm);
+
+        //     try {
+        //         const response = await fetch('/upload_personnage', {
+        //             method: 'POST',
+        //             body: formData
+        //         });
+
+        //         const text = await response.text();
+
+        //         if (response.ok) {
+        //             alert("✅ " + text); // popup de confirmation
+        //             uploadForm.reset();
+        //             preview.innerHTML = ""; // réinitialiser la preview
+        //         } else {
+        //             alert("❌ Erreur : " + text);
+        //         }
+        //     } catch (err) {
+        //         console.error(err);
+        //         alert("❌ Erreur serveur");
+        //     }
+        // });
+
     </script>
+
 </body>
 </html>
