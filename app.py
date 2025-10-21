@@ -112,7 +112,7 @@ def upload_personnage():
                 "model": "gemma3:latest",
                 "messages": [{"role": "user", "content": prompt, "images": [image_base64]}]
             },
-            timeout=180
+            timeout=600
         )
 
         debug_content += f"RAW RESPONSE:\n{response.text}\n\n"

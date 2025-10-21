@@ -42,6 +42,3 @@ volumes:
   postgres_data:
   ollama_models:
 
-networks:
-  default:
-    name: mini_network
