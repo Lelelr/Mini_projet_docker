@@ -84,20 +84,20 @@ def upload_personnage():
 
 
 # -------------------- ROUTES SUPPRESSION--------------------
-@app.route('/delete_image/<int:image_id>', methods=['DELETE'])
-def delete_image(image_id):
-    image = Image.query.get_or_404(image_id)
+# @app.route('/delete_image/<int:image_id>', methods=['DELETE'])
+# def delete_image(image_id):
+#     image = Image.query.get_or_404(image_id)
     
-    # Supprimer le fichier
-    file_path = os.path.join(app.static_folder, 'uploaded_images', image.filename)
-    if os.path.exists(file_path):
-        os.remove(file_path)
+#     # Supprimer le fichier
+#     file_path = os.path.join(app.static_folder, 'uploaded_images', image.filename)
+#     if os.path.exists(file_path):
+#         os.remove(file_path)
 
-    # Supprimer de la DB
-    db.session.delete(image)
-    db.session.commit()
+#     # Supprimer de la DB
+#     db.session.delete(image)
+#     db.session.commit()
 
-    return jsonify({"success": True})
+#     return jsonify({"success": True})
 
 
 # ------------------------ LANCEMENT ------------------------
