@@ -9,10 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
+
 <body>
-        <!---------------------------------------- NAVBAR ---------------------------------------->
+    <!---------------------------------------- NAVBAR ---------------------------------------->
     <div class="navbar">
         <nav>
             <div class="logo">
@@ -64,12 +66,36 @@
                 <div id="preview"></div>
             </div>
 
-            <button type="submit" class="button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
-            </svg>
-            <div class="text">Générer</div>
-            </button>
+            <div class="affichage_boutons">
+                
+                <!-- Bouton Ollama -->
+                <button type="button" id="fileSelect" class="button_api choix-btn">
+                    <span class="dot"></span>
+                    <i class='bxl bx-ollama' style='color:#ffffff; margin-right: 5px;'></i>
+                    Générer avec Ollama
+                </button>
+
+                <!-- Bouton 2 -->
+                <button type="button" id="fileSelect" class="button_api choix-btn">
+                    <span class="dot"></span>
+                    Générer avec je sais pas quoi
+                </button>
+
+                <!-- Bouton 3 -->
+                <button type="button" id="fileSelect" class="button_api choix-btn">
+                    <span class="dot"></span>
+                    Générer avec je sais pas qui quand
+                </button>
+                
+                <!-- Bouton Générer -->
+                <button type="submit" class="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                </svg>
+            
+                <div class="text">Générer</div>
+                </button>
+            </div>
         </form>
     </div>
 
@@ -170,5 +196,21 @@
 
     </script>
 
-</body>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.choix-btn');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Retirer la sélection de tous les boutons
+                    buttons.forEach(b => b.classList.remove('selected'));
+                    // Ajouter la sélection au bouton cliqué
+                    btn.classList.add('selected');
+                });
+            });
+        });
+    </script>
+
 </html>

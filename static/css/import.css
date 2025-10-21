@@ -314,7 +314,7 @@ html {
 #drop-area {
     border: 2px dashed #ccc;
     border-radius: 20px;
-    width: 300px;
+    width: 500px;
     height: 200px;
     text-align: center;
     padding: 20px;
@@ -340,3 +340,56 @@ button {
     max-height: 100px;
     border-radius: 10px;
 }
+
+
+
+
+.affichage_boutons {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.choix {
+    display: flex;
+    gap: 10px;
+}
+
+.button_api {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 20px;
+    border: 2px solid #7c7c7c;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: border 0.2s, background 0.2s;
+    justify-content: flex-start; /* Assure que tout commence à gauche */
+}
+
+/* Petit point à gauche */
+.button_api .dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00f; /* bleu */
+    border-radius: 50%;
+    margin-right: 10px;
+    display: none; /* caché par défaut */
+}
+
+/* État sélectionné */
+.button_api.selected {
+    border-color: #00f;
+}
+
+.button_api.selected .dot {
+    display: inline-block;
+}
+
+/* Hover effet */
+.button_api:hover {
+    border-color: #3654ff;
+}
+
